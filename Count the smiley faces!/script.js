@@ -1,56 +1,101 @@
 function countSmileys(arr) {
-  let smile = 0;
-  let eyes = [':', ';'];
-  let nose = ['-', '~'];
-  let mouth = [')', 'D'];
-  let newArr = [];
-  let array = [];
+  /* 
+     1. если у элемента массива три знака то поместить этот элемент в отдельный массив NOSE
+     2. удалить из начального массива элементы с носом
+     3. у всех элементов "без носа" сделать проверку на глаза.
+       3.1 проверить первый символ элемента на соответствие с глазами : or ;
+       3.2 если первый символ элемента содержит недопустимый знак то удалить его
+     4. у всех элементов "без носа" сделать проверку на рот 
+       4.1 проверить первый символ элемента на соответствие с глазами ) or D
+       4.2 если первый символ элемента содержит недопустимый знак то удалить его
+  */
+  let nose = [];
+  let noNose = [];
+  /* 1 ================================================================================== */
+
 
   arr.forEach((element, i) => {
-    if (element[0][0] === eyes[0] || element[0][0] === eyes[1]) {
-      array[i] = element;
-      newArr = array.filter(function (el) {
-        return el !== null;
-      });
-      return newArr;
+    if (element.length > 2) {
+      nose[i] = element;
+      nose = nose.filter((entry) => {
+        return entry.trim() != ''
+      }); // удаляем все элементы без носа
     }
   });
 
 
+  /* 2 ================================================================================== */
 
-  newArr.forEach(el => {
-    if (el.length > 2) {
-      if (el[1] === nose[0] || el[1] === nose[1]) {
-        return newArr;
-      } else {
-        newArr.splice(newArr.indexOf(el), 1);
-        return newArr;
-      }
+  arr.forEach((element, i) => {
+    if (element.length === 2) {
+      noNose[i] = element;
     }
   });
 
+  /* 3 ================================================================================== */
 
 
-  newArr.forEach(el => {
-    if (el[1] === mouth[0] || el[1] === mouth[1]) {
-      return newArr;
-    } 
-    // else {
-    //   newArr.splice(newArr.indexOf(el), 1);
-    //   return newArr;
-    // }
+  noNose.filter(el => {
+    if (el[0] === ':' || el[0] === ';') {
+      return noNose;
+    } else {
+      let i = noNose.indexOf(el);
+      noNose.splice(i, 1);
+    }
+  });
+  
+  // console.log(noNose);
+ 
+  /* 4 ================================================================================== */
+  noNose.filter(el => {
+    if (el[1] === ')' || el[1] === 'D') {
+      console.log(el);
+      noNose = el;
+    } else {
+    
+      // let i = noNose.indexOf(el);
+    
+      // noNose.splice(i, 1);
+      
+    }
   });
 
+  /* 5 ================================================================================== */
+  nose.filter(el => {
+    if (el[0] === ':' || el[0] === ';') {
+      nose = el;
+    } else {
+      // console.log(1);
+      // let i = nose.indexOf(el);
+      // nose.splice(i, 1);
+    }
 
+    if (el[2] === ')' || el[2] === 'D') {
+      nose = el;
+    } else {
+      // console.log(2);
+      // let i = nose.indexOf(el);
+      // nose.splice(i, 1);
+    }
 
+    if (el[1] === '-' || el[1] === '~') {
+      nose = el;
+    } else {
+      // let i = nose.indexOf(el);
+      // nose.splice(i, 1);
+    }
+  })
 
-  let sum = newArr.length;
-  console.log(newArr);
-  // console.log(sum);
-  return sum;
+  console.log(noNose);
+  console.log(nose);
 
+  let res = [nose].length + [noNose].length;
+  console.log(res);
 
+  return res;
+
+ 
 }
 
 
-countSmileys([':)', ':(', ':D', ':O', ':;']);
+countSmileys([':D',':~)',';~D',':)']);
