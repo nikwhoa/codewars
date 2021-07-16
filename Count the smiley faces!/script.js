@@ -1,101 +1,108 @@
 function countSmileys(arr) {
-  /* 
-     1. если у элемента массива три знака то поместить этот элемент в отдельный массив NOSE
-     2. удалить из начального массива элементы с носом
-     3. у всех элементов "без носа" сделать проверку на глаза.
-       3.1 проверить первый символ элемента на соответствие с глазами : or ;
-       3.2 если первый символ элемента содержит недопустимый знак то удалить его
-     4. у всех элементов "без носа" сделать проверку на рот 
-       4.1 проверить первый символ элемента на соответствие с глазами ) or D
-       4.2 если первый символ элемента содержит недопустимый знак то удалить его
-  */
-  let nose = [];
-  let noNose = [];
-  /* 1 ================================================================================== */
+  // проверить у какого элемента массива три символа, 
+  // если он есть, то провести проверку на глаза
+  // если первый символ соотвествует глазам то оставить этот элемент в массиве
+  // если не соотвествует то удалить его с массива
+  // провести проверку на нос
+  
+  let noses = [];
+  
 
+  
+  let eyes = [':', ';'];
+  let nose = ['-', '~'];
+  let mouth = [')', 'D'];
 
-  arr.forEach((element, i) => {
-    if (element.length > 2) {
-      nose[i] = element;
-      nose = nose.filter((entry) => {
-        return entry.trim() != ''
-      }); // удаляем все элементы без носа
-    }
-  });
-
-
-  /* 2 ================================================================================== */
-
-  arr.forEach((element, i) => {
-    if (element.length === 2) {
-      noNose[i] = element;
-    }
-  });
-
-  /* 3 ================================================================================== */
-
-
-  noNose.filter(el => {
-    if (el[0] === ':' || el[0] === ';') {
-      return noNose;
-    } else {
-      let i = noNose.indexOf(el);
-      noNose.splice(i, 1);
+  // проверить у какого элемента массива три символа, 
+  arr.filter((el,i) => {
+    if (el.length > 2) {
+      noses[i] = el;
+      noses = noses.filter((entry) => {
+        return entry.trim() !== '';
+      }); // удаляем пустые элементы
     }
   });
   
-  // console.log(noNose);
- 
-  /* 4 ================================================================================== */
-  noNose.filter(el => {
-    if (el[1] === ')' || el[1] === 'D') {
-      console.log(el);
-      noNose = el;
-    } else {
-    
-      // let i = noNose.indexOf(el);
-    
-      // noNose.splice(i, 1);
-      
+
+  // если он есть, то провести проверку на глаза
+  // если первый символ соотвествует глазам то поместить правильный элемент в новый массив
+  let correctNoses = [];
+  noses.filter((el,i) => {
+    if (el[0] === eyes[0] || el[0] === eyes[1]) {
+      correctNoses[i] = el;
+      correctNoses = correctNoses.filter((entry) => {
+        return entry.trim() !== '';
+      });
     }
   });
 
-  /* 5 ================================================================================== */
-  nose.filter(el => {
-    if (el[0] === ':' || el[0] === ';') {
-      nose = el;
-    } else {
-      // console.log(1);
-      // let i = nose.indexOf(el);
-      // nose.splice(i, 1);
+  let correctNosesNose = [];
+  // провести проверку на нос
+  correctNoses.filter((el, i) => {
+    if (el[1] === nose[0] || el[1] === nose[1]) {
+      correctNosesNose[i] = el;
+      correctNosesNose = correctNosesNose.filter((entry) => {
+        return entry.trim() !== '';
+      });
     }
+  });
 
-    if (el[2] === ')' || el[2] === 'D') {
-      nose = el;
-    } else {
-      // console.log(2);
-      // let i = nose.indexOf(el);
-      // nose.splice(i, 1);
+  // провести проверку на рот
+
+  let correctNosesNoseMouth = [];
+  
+  correctNosesNose.filter((el, i) => {
+    if (el[2] === mouth[0] || el[2] === mouth[1]) {
+      correctNosesNoseMouth[i] = el;
+      correctNosesNoseMouth = correctNosesNoseMouth.filter((entry) => {
+        return entry.trim() !== '';
+      });
     }
+  });
 
-    if (el[1] === '-' || el[1] === '~') {
-      nose = el;
-    } else {
-      // let i = nose.indexOf(el);
-      // nose.splice(i, 1);
+  /* correctNosesNoseMouth элементы с носом - все! ================================================================================== */
+  // console.log(correctNosesNoseMouth);
+ 
+  let eyesArray = [];
+  
+  arr.filter((el,i) => {
+    if (el.length === 2) {
+      eyesArray[i] = el;
+      eyesArray = eyesArray.filter((entry) => {
+        return entry.trim() !== '';
+      }); // удаляем пустые элементы
+    }
+  });
+
+  let eyesArrayCorrect = [];
+
+  eyesArray.filter((el, i) => {
+    if (el[0] === eyes[0] || el[0] === eyes[1]) {
+      eyesArrayCorrect[i] = el;
+      eyesArrayCorrect = eyesArrayCorrect.filter((entry) => {
+        return entry.trim() !== '';
+      }); // удаляем пустые элементы
     }
   })
 
-  console.log(noNose);
-  console.log(nose);
+let mouthArray = [];
 
-  let res = [nose].length + [noNose].length;
-  console.log(res);
+eyesArrayCorrect.filter((el, i) => {
+  if (el[1] === mouth[0] || el[1] === mouth[1]) {
+    mouthArray[i] = el;
+    mouthArray = mouthArray.filter((entry) => {
+      return entry.trim() !== '';
+    }); // удаляем пустые элементы
+  }
+})
 
-  return res;
+let sum = mouthArray.length + correctNosesNoseMouth.length;
 
- 
+console.log(sum);
+  
+return sum;
+
 }
 
 
-countSmileys([':D',':~)',';~D',':)']);
+countSmileys([';]', ':[', ';*', ':$', ';-D']);
