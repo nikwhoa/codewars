@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract the domain name from a URL</title>
+</head>
+<style>
+    html,
+    body {
+        /* padding: 1%; */
+        text-align: center;
+        font-size: 20px;
+        margin: 0 auto;
+    }
+
+    pre {
+        background-color: #fdfdfd;
+        border-radius: .375rem;
+        font-size: .875em;
+        line-height: 1.7142857;
+        margin-bottom: 1.7142857em;
+        margin-top: 1.7142857em;
+        overflow-x: auto;
+        padding: .8571429em 1.1428571em;
+    }
+</style>
+
+<body>
+    <div class="markdown prose max-w-none" id="description">
+        <p>Write a function that when given a URL as a string, parses out just the domain name and returns it as a
+            string. For example:</p>
+        <pre style="display: none;"><code class="language-ruby"><span class="cm-variable">domain_name</span>(<span class="cm-string">"http://github.com/carbonfive/raygun"</span>) <span class="cm-operator">==</span> <span class="cm-string">"github"</span> 
+        <span class="cm-variable">domain_name</span>(<span class="cm-string">"http://www.zombie-bites.com"</span>) <span class="cm-operator">==</span> <span class="cm-string">"zombie-bites"</span>
+        <span class="cm-variable">domain_name</span>(<span class="cm-string">"https://www.cnet.com"</span>) <span class="cm-operator">==</span> <span class="cm-string">"cnet"</span>
+        </code></pre>
+        <pre style="display: none;"><code class="language-python"><span class="cm-variable">domain_name</span>(<span class="cm-string">"http://github.com/carbonfive/raygun"</span>) <span class="cm-operator">==</span> <span class="cm-string">"github"</span> 
+        <span class="cm-variable">domain_name</span>(<span class="cm-string">"http://www.zombie-bites.com"</span>) <span class="cm-operator">==</span> <span class="cm-string">"zombie-bites"</span>
+        <span class="cm-variable">domain_name</span>(<span class="cm-string">"https://www.cnet.com"</span>) <span class="cm-operator">==</span> <span class="cm-string">"cnet"</span>
+        </code></pre>
+        <pre><code class="language-javascript"><span class="cm-variable">domainName</span>(<span class="cm-string">"http://github.com/carbonfive/raygun"</span>) <span class="cm-operator">==</span> <span class="cm-string">"github"</span> 
+        <span class="cm-variable">domainName</span>(<span class="cm-string">"http://www.zombie-bites.com"</span>) <span class="cm-operator">==</span> <span class="cm-string">"zombie-bites"</span>
+        <span class="cm-variable">domainName</span>(<span class="cm-string">"https://www.cnet.com"</span>) <span class="cm-operator">==</span> <span class="cm-string">"cnet"</span>
+        </code></pre>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
